@@ -4,9 +4,7 @@ WIP. Link to routes by a global name, instead of a path.
 
 ## Installation
 
-```
-npm install react-router-named-routes react-router-apply-middleware
-```
+...
 
 ## Usage
 
