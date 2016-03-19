@@ -38,3 +38,9 @@ const routes = (
 />
 ```
 
+## More Work
+
+- need to figure out `router.push`
+- this might be better as a `useNamedRoutes` history middleware instead
+  of router middleware
+
