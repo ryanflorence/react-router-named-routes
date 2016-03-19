@@ -1,6 +1,6 @@
 {
   "name": "react-router-named-routes",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Name says it all",
   "main": "lib/NamedRoutes",
   "repository": {
@@ -10,8 +10,8 @@
   "bugs": "https://github.com/ryanflorence/react-router-named-routes/issues",
   "scripts": {
     "build": "babel ./modules -d lib --ignore '__tests__'",
-    "build-umd": "NODE_ENV=production webpack modules/NamedRoutes.js umd/NamedRoutes.js",
-    "build-min": "NODE_ENV=production webpack -p modules/NamedRoutes.js umd/NamedRoutes.min.js",
+    "build-umd": "NODE_ENV=production webpack modules/index.js umd/ReactRouterNamedRoutes.js",
+    "build-min": "NODE_ENV=production webpack -p modules/index.js umd/ReactRouterNamedRoutes.min.js",
     "lint": "eslint modules",
     "start": "babel-node example/server.js",
     "test": "npm run lint && karma start",
