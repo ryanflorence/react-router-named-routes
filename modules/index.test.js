@@ -2,9 +2,10 @@
 import React from 'react'
 import expect from 'expect'
 import { Router, Route, IndexRoute } from 'react-router'
-import { NamedRoutes, NamedRouteLink } from './index'
+import { useNamedRoutes, NamedRouteLink } from './index'
 import { render } from 'react-dom'
 import createHistory from 'react-router/lib/createMemoryHistory'
+import applyMiddleware from 'react-router-apply-middleware'
 
 describe('NamedRoutes', () => {
   const run = (link, initialPath, assertion) => {
@@ -43,7 +44,7 @@ describe('NamedRoutes', () => {
       <Router
         routes={routes}
         history={createHistory(initialPath)}
-        render={props => <NamedRoutes {...props} routeConfig={routes}/>}
+        render={applyMiddleware(useNamedRoutes(routes))}
       />
     ), div)
   }

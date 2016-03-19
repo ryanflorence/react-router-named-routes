@@ -1,9 +1,9 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
-
+import applyMiddleware from 'react-router-apply-middleware'
 import {
-  NamedRoutes,
+  useNamedRoutes,
   NamedRouteLink as Link
 } from 'react-router-named-routes'
 
@@ -94,9 +94,9 @@ const routes = (
 
 render(
   <Router
+    render={applyMiddleware(useNamedRoutes(routes))}
     history={browserHistory}
     routes={routes}
-    render={props => <NamedRoutes {...props} routeConfig={routes}/>}
   />,
   document.getElementById('app')
 )

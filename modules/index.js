@@ -1,9 +1,13 @@
 import React from 'react'
 import Link from 'react-router/lib/Link'
-import RouterContext from 'react-router/lib/RouterContext'
-import IndexRoute from 'react-router/lib/IndexRoute'
 import { formatPattern } from 'react-router/lib/PatternUtils'
 import warning from 'warning'
+
+export const useNamedRoutes = (routes) => ({
+  renderRootContainer: (props) => (
+    <NamedRoutesContainer {...props} routeConfig={routes}/>
+  )
+})
 
 const { shape, any, object } = React.PropTypes
 
@@ -13,11 +17,12 @@ const namedRoutesContextType = {
   }).isRequired
 }
 
-
 const createRouteMap = (routes, accumulatedPath='', map={}) => {
   React.Children.forEach(routes, (route) => {
     const slash = accumulatedPath === '/' ? '' : '/'
-    const path = route.type === IndexRoute ? accumulatedPath :
+    // can't type check because we might have a different IndexRoute in node_modules
+    const isIndexRoute = route.type.displayName === 'IndexRoute'
+    const path = isIndexRoute ? accumulatedPath :
       route.props.path === '/' ?
         '/' : `${accumulatedPath}${slash}${route.props.path}`
     if (route.props.name)
@@ -28,13 +33,9 @@ const createRouteMap = (routes, accumulatedPath='', map={}) => {
   return map
 }
 
-export const NamedRoutes = React.createClass({
+const NamedRoutesContainer = React.createClass({
   propTypes: {
     routeConfig: any.isRequired
-  },
-
-  getDefaultProps() {
-    return { render: props => <RouterContext {...props}/> }
   },
 
   childContextTypes: namedRoutesContextType,
@@ -49,7 +50,8 @@ export const NamedRoutes = React.createClass({
   },
 
   render() {
-    return this.props.render(this.props)
+    const { render, ...props } = this.props
+    return render(props)
   }
 })
 
