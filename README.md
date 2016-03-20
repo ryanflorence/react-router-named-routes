@@ -34,6 +34,10 @@ const routes = (
   params={{ number: 10 }}
   query={{ foo: 'bar' }}
 />
+
+// don't forget, you can just call it Link if you'd prefer
+import { NamedRouteLink as Link } from 'react-router-named-routes'
+<Link to="home"/>
 ```
 
 ## More Work
