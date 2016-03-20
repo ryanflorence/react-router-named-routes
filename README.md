@@ -43,6 +43,6 @@ import { NamedRouteLink as Link } from 'react-router-named-routes'
 ## More Work
 
 - need to figure out `router.push`
-- this might be better as a `useNamedRoutes` history middleware instead
-  of router middleware
+- this needs a `useNamedRoutes` history middleware too, unless we're okay with
+  wrapping histories in the component lifecycle :\
 
