@@ -16,7 +16,7 @@ import applyMiddleware from 'react-router-apply-middleware'
 const routes = (
   <Route path="/" component={Root}>
     <IndexRoute name="home" component={Home}/>
-    <Route path="chapter" path="chapter/:number" component={Chapter}/>
+    <Route name="chapter" path="chapter/:number" component={Chapter}/>
   </Route>
 )
 
