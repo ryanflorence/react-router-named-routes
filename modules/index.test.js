@@ -27,7 +27,7 @@ describe('NamedRoutes', () => {
     const Index = () => <div>Index</div>
 
     const routes = (
-      <Route path="/" component={Container}>
+      <Route path="/" name="base" component={Container}>
         <IndexRoute name="index" component={Index}/>
         <Route name="parent" path="p" component={Parent}>
           <Route name="reference" path="r" component={Reference}>
@@ -50,21 +50,21 @@ describe('NamedRoutes', () => {
   }
 
   it('links to routes by name', (done) => {
-    run(<NamedRouteLink to="parent"/>, '/p/r', (node) => {
+    run(<NamedRouteLink to="base.parent"/>, '/p/r', (node) => {
       expect(node.getAttribute('href')).toEqual('/p')
       done()
     })
   })
 
   it('works with index routes', (done) => {
-    run(<NamedRouteLink to="index"/>, '/p/r', (node) => {
+    run(<NamedRouteLink to="base.index"/>, '/p/r', (node) => {
       expect(node.getAttribute('href')).toEqual('/')
       done()
     })
   })
 
   it('injects params', (done) => {
-    run(<NamedRouteLink to="child" params={{ param: 'test' }}/>, '/p/r', (node) => {
+    run(<NamedRouteLink to="base.parent.reference.child" params={{ param: 'test' }}/>, '/p/r', (node) => {
       expect(node.getAttribute('href')).toEqual('/p/r/c/test')
       done()
     })
